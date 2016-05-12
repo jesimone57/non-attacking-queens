@@ -92,7 +92,7 @@ public class NonAttackingQueens {
 		for (int i = 0; i < 8; i++) {
 			args[i] = (i == n ? "Q" : " ");
 		}
-		System.out.format("| %s | %s | %s | %s | %s | %s | %s | %s |\n", (Object[])args);
+		System.out.format("| %s | %s | %s | %s | %s | %s | %s | %s |\n", (Object[]) args);
 		System.out.println("|---|---|---|---|---|---|---|---|");
 	}
 
@@ -166,6 +166,7 @@ public class NonAttackingQueens {
 
 	/**
 	 * Permutes a list
+	 *
 	 * @param prefix
 	 * @param list
 	 */
