@@ -1,6 +1,11 @@
-
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Created by jsimone on 12/14/15.
@@ -167,8 +172,8 @@ public class NonAttackingQueens {
 	/**
 	 * Permutes a list
 	 *
-	 * @param prefix
-	 * @param list
+	 * @param prefix starting prefix for recursion
+	 * @param list list
 	 */
 	private static void permutation(List<String> prefix, List<String> list) {
 		int n = list.size();
@@ -176,11 +181,11 @@ public class NonAttackingQueens {
 			System.out.println(prefix);
 		} else {
 			for (int i = 0; i < n; i++) {
-				List<String> newList = new ArrayList();
+				List<String> newList = new ArrayList<>();
 				newList.addAll(list.subList(0, i));
 				newList.addAll(list.subList(i + 1, n));
 
-				List<String> prefixList = new ArrayList();
+				List<String> prefixList = new ArrayList<>();
 				prefixList.addAll(prefix);
 				prefixList.add(list.get(i));
 				//System.out.println("going in with prefix="+prefixList+"     and list="+newList);
@@ -189,5 +194,3 @@ public class NonAttackingQueens {
 		}
 	}
 }
-
-
