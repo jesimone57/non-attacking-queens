@@ -133,7 +133,7 @@ public class NonAttackingQueens {
 		return result;
 	}
 
-	private static boolean isNonAttackingOnDiagonal(String s) {
+	public static boolean isNonAttackingOnDiagonal(String s) {
 		boolean result = true;
 		for (int i = 0; i < s.length(); i++) {
 			String s2 = String.valueOf(s.charAt(i));
@@ -173,12 +173,13 @@ public class NonAttackingQueens {
 	 * Permutes a list
 	 *
 	 * @param prefix starting prefix for recursion
-	 * @param list list
+	 * @param list   list
 	 */
-	private static void permutation(List<String> prefix, List<String> list) {
+	public static void permutation(List<String> prefix, List<String> list, List<String> results) {
 		int n = list.size();
 		if (n == 0) {
-			System.out.println(prefix);
+			//System.out.println("->"+prefix);
+			results.add(prefix.stream().map(e -> e.toString()).reduce("", String::concat));
 		} else {
 			for (int i = 0; i < n; i++) {
 				List<String> newList = new ArrayList<>();
@@ -189,7 +190,7 @@ public class NonAttackingQueens {
 				prefixList.addAll(prefix);
 				prefixList.add(list.get(i));
 				//System.out.println("going in with prefix="+prefixList+"     and list="+newList);
-				permutation(prefixList, newList);
+				permutation(prefixList, newList, results);
 			}
 		}
 	}
