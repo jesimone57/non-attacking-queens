@@ -2,7 +2,7 @@
 
 ### Description
 >Is it possible to place 8 queens on a standard chess board without any queen being able to 
-any other queen?  If so, how many solutions are possible?
+attack any other queen?  If so, how many solutions are possible?
 
 >See [Wikipedia description of the problem](https://en.wikipedia.org/wiki/Eight_queens_puzzle)
 
