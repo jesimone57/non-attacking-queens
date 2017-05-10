@@ -1,10 +1,38 @@
 # Solution to the Eight Queen Problem/Puzzle
 
-### Description
+### Description of Problem
 >Is it possible to place 8 queens on a standard chess board without any queen being able to 
 attack any other queen?  If so, how many solutions are possible?
 
->See [Wikipedia description of the problem](https://en.wikipedia.org/wiki/Eight_queens_puzzle)
+>What about solutions possible if we change the board size? What happens if we have a 5 x 5 board or 10 x 10?  
+
+>See Full Details here [Wikipedia Article on the 8 Queen Puzzle](https://en.wikipedia.org/wiki/Eight_queens_puzzle)
+
+### Plan for Solution
+> The first thing we need is a good representation for the state of the queens on the board.  The representation
+used here is a string of integers, based on index origin 0, which represents the position of the queens.
+>This has several nice advantages:
+<ol>
+<li>If the length of the string matches the board length and width, then we are guaranteed there is only 1
+queen per rank (or row) and file (or column).
+<li>If we generate a set of integers with no duplicates (say 01234567 instead of 01102233) then we are guaranteed
+also that there is only 1 queen per rank/row and file/column.
+<li>The combination of the two above will guarantee non-attacking in every rank and file.
+<li>We will be able to address diagonal attacks by creating a method which will tell us whether the paricular
+combination of ordinal integers is non-attacking or not.
+</ol>
+
+>The next thing we need is a way to permute a set of integers to come up with every possible permutation
+of those integers.  We'll use a recursive method for this and there are many examples available on how this
+can be implemented.
+
+>We will need a method to tell us if the queens are attacked on the diagonal or not.
+
+>We wil need a way to determine which solutions are unique and which solutions are just a rotation or mirror
+of the board and therefore duplicates or already found solutions.
+
+>Lastly we will need a way to display the solution in clear way and in which we can verify with the known
+solutions.
 
 ### To execute the code
 1. git clone the repo to your local machine
@@ -12,8 +40,8 @@ attack any other queen?  If so, how many solutions are possible?
 3. cd target/classes
 3. java NonAttackingQueens
 
-### Sample Output
-
+### Sample Output for a Standard 8 by 8 Chess Board
+ 
 <pre>
 java NonAttackingQueens
 There are 92 solutions.
@@ -259,4 +287,46 @@ Unique Solution 12:  14602753  other rotations and refliections: [25160374, 3047
 |---|---|---|---|---|---|---|---|
 |   |   |   | Q |   |   |   |   |
 |---|---|---|---|---|---|---|---|
+</pre>
+
+### Sample Output for a 5 by 5 Chess Board
+
+Other board sizes are possible by changing the BOARD_SIZE variable in the main function.
+Here is sample output for a board size of 5:
+
+<pre>
+Ordinal Encoding of Queen Positions: 01234
+There are 10 solutions.
+<br/>
+Solutions encoded by the file/column ordinal of the Queen's position on the board:
+[02413, 03142, 13024, 14203, 20314, 24130, 30241, 31420, 41302, 42031]
+<br/>
+There are 2 unique solutions by taking into account all possible rotations and reflections/mirrors of the board.
+<br/>
+Unique Solution 1:  14203  All possible rotations and refliections/mirrors give: [14203, 30241]
+|---|---|---|---|---|
+|   | Q |   |   |   |
+|---|---|---|---|---|
+|   |   |   |   | Q |
+|---|---|---|---|---|
+|   |   | Q |   |   |
+|---|---|---|---|---|
+| Q |   |   |   |   |
+|---|---|---|---|---|
+|   |   |   | Q |   |
+|---|---|---|---|---|
+
+<br/>
+Unique Solution 2:  02413  All possible rotations and refliections/mirrors give: [02413, 03142, 13024, 20314, 24130, 31420, 41302, 42031]
+|---|---|---|---|---|
+| Q |   |   |   |   |
+|---|---|---|---|---|
+|   |   | Q |   |   |
+|---|---|---|---|---|
+|   |   |   |   | Q |
+|---|---|---|---|---|
+|   | Q |   |   |   |
+|---|---|---|---|---|
+|   |   |   | Q |   |
+|---|---|---|---|---|
 </pre>

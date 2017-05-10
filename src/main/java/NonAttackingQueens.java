@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * Created by jsimone on 12/14/15.
@@ -30,10 +32,14 @@ import java.util.TreeSet;
 public class NonAttackingQueens {
 
 	public static void main(String[] args) {
+		int BOARD_SIZE = 8;
 		List<String> results = new ArrayList<>();
-		permutation("", "01234567", results);
+		String ordinalEncoding = IntStream.range(0, BOARD_SIZE).mapToObj(i -> ((Integer) i).toString()).collect(Collectors.joining(""));
+		System.out.println("Ordinal Encoding of Queen Positions: " + ordinalEncoding);
+		permutation("", ordinalEncoding, results);
 
-		System.out.println("There are " + results.size() + " solutions.");
+		System.out.println("There are " + results.size() + " solutions.\n");
+		System.out.println("Solutions encoded by the file/column ordinal of the Queen's position on the board:");
 		System.out.println(results);
 
 
@@ -55,66 +61,49 @@ public class NonAttackingQueens {
 //        System.out.println(flip(rotate(solution)));
 //        System.out.println(reverse(flip(rotate(solution))));
 
-		Map<String, Set<String>> map = pruneResults(results);
+		Map<String, Set<String>> map = pruneResults(results, BOARD_SIZE);
 		System.out.println("\nThere are " + map.size() + " unique solutions " +
-				"by taking into account all possible rotations and reflections of the board.\n");
-		int i = 0;
-		for (String key : map.keySet()) {
-			System.out.println("Unique Solution " + (++i) + ":  " + key + "  other rotations and refliections: " + map.get(key));
-			displayBoard(key);
+				"by taking into account all possible rotations and reflections/mirrors of the board.\n");
+		Display.displaySolutions(map, BOARD_SIZE);
+	}
+
+	private static void addVariationToSet(String variation, Set<String> variationSet, Set<String> resultsAlreadyAccountedFor) {
+		if (!resultsAlreadyAccountedFor.contains(variation)) {
+			if (!variationSet.contains(variation)) {
+				variationSet.add(variation);
+				resultsAlreadyAccountedFor.add(variation);
+			}
 		}
 	}
 
-	private static Map<String, Set<String>> pruneResults(List<String> results) {
+	private static Map<String, Set<String>> pruneResults(List<String> results, int boardSize) {
 		Map<String, Set<String>> pruned = new HashMap<>();
-		Set<String> alreadyAccountedFor = new HashSet<>();
-		Set<String> similar = null;
-		for (String s : results) {
-			if (!pruned.containsKey(s)) {
-				similar = new TreeSet<>();
-			} else {
-				similar = pruned.get(s);
-			}
-			if (!alreadyAccountedFor.contains(s)) {
-				similar.add(reverse(s));
-				similar.add(flip(s));
-				similar.add(reverse(flip(s)));
-				similar.add(rotate(s));
-				similar.add(reverse(rotate(s)));
-				similar.add(flip(rotate(s)));
-				similar.add(reverse(flip(rotate(s))));
-				pruned.put(s, similar);
+		Set<String> resultsAlreadyAccountedFor = new HashSet<>();
+		for (String result : results) {
+			if (!resultsAlreadyAccountedFor.contains(result)) {
+				Set<String> variationSet = new TreeSet<>();
 
-				alreadyAccountedFor.add(s);
-				alreadyAccountedFor.addAll(similar);
+				// add all the variations for this particular result, if they have not already been accounted for
+				addVariationToSet(result, variationSet, resultsAlreadyAccountedFor);
+				addVariationToSet(reverse(result), variationSet, resultsAlreadyAccountedFor);
+				addVariationToSet(flip(result, boardSize), variationSet, resultsAlreadyAccountedFor);
+				addVariationToSet(reverse(flip(result, boardSize)), variationSet, resultsAlreadyAccountedFor);
+				addVariationToSet(rotate(result, boardSize), variationSet, resultsAlreadyAccountedFor);
+				addVariationToSet(reverse(rotate(result, boardSize)), variationSet, resultsAlreadyAccountedFor);
+				addVariationToSet(flip(rotate(result, boardSize), boardSize), variationSet, resultsAlreadyAccountedFor);
+				addVariationToSet(reverse(flip(rotate(result, boardSize), boardSize)), variationSet, resultsAlreadyAccountedFor);
+				pruned.put(result, variationSet);
 			}
 		}
 		return pruned;
-	}
-
-	private static void displayRow(int n) {
-		String[] args = new String[8];
-		for (int i = 0; i < 8; i++) {
-			args[i] = (i == n ? "Q" : " ");
-		}
-		System.out.format("| %s | %s | %s | %s | %s | %s | %s | %s |\n", (Object[]) args);
-		System.out.println("|---|---|---|---|---|---|---|---|");
-	}
-
-	private static void displayBoard(String s) {
-		System.out.println("|---|---|---|---|---|---|---|---|");
-		for (Character c : s.toCharArray()) {
-			displayRow(Integer.valueOf(String.valueOf(c)));
-		}
-		System.out.println("\n");
 	}
 
 	private static String reverse(String s) {
 		return new StringBuilder(s).reverse().toString();
 	}
 
-	private static String rotate(String s) {
-		String[] result = new String[8];
+	private static String rotate(String s, int boardSize) {
+		String[] result = new String[boardSize];
 		int col = 0;
 		for (Character c : s.toCharArray()) {
 			Integer row = Character.getNumericValue(c);
@@ -124,11 +113,12 @@ public class NonAttackingQueens {
 		return Arrays.toString(result).join("", result);
 	}
 
-	private static String flip(String s) {
+	private static String flip(String s, int boardSize) {
+		int maxOrdinal = boardSize - 1;
 		String result = "";
 		for (Character c : s.toCharArray()) {
 			Integer i = Character.getNumericValue(c);
-			result = result + (7 - i);
+			result = result + (maxOrdinal - i);
 		}
 		return result;
 	}
