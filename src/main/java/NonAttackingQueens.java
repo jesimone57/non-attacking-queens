@@ -169,7 +169,7 @@ public class NonAttackingQueens {
 		int n = list.size();
 		if (n == 0) {
 			//System.out.println("->"+prefix);
-			results.add(prefix.stream().map(e -> e.toString()).reduce("", String::concat));
+			results.add(prefix.stream().reduce("", String::concat));
 		} else {
 			for (int i = 0; i < n; i++) {
 				List<String> newList = new ArrayList<>();
