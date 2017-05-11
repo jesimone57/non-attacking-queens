@@ -10,7 +10,9 @@ public class Display {
 
 	public static void displayRow(int rowOrdinal, int boardSize) {
 		StringBuilder sbCell = new StringBuilder();
+		sbCell.append(" ").append(rowOrdinal).append(" ");
 		StringBuilder sbDivider = new StringBuilder();
+		sbDivider.append("   ");
 		String[] args = new String[boardSize];
 		for (int i = 0; i < boardSize; i++) {
 			args[i] = (i == rowOrdinal ? "Q" : " ");
@@ -25,6 +27,7 @@ public class Display {
 
 	public static void displayBoard(String s, int boardSize) {
 		StringBuilder sbDivider = new StringBuilder();
+		sbDivider.append("   ");
 		for (int i = 0; i < boardSize; i++) {
 			sbDivider.append("|---");
 		}

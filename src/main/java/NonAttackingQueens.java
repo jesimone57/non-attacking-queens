@@ -33,13 +33,30 @@ public class NonAttackingQueens {
 
 	public static void main(String[] args) {
 		int BOARD_SIZE = 8;
+		if (args.length == 1) {
+			try {
+				BOARD_SIZE = Integer.valueOf(args[0]);
+			} catch (NumberFormatException ex) {
+				System.out.println("Usage is: java NonAttackingQueens n");
+				System.out.println("Where n = board size.  n must be in the range of 1 through 10.  n is optional and if omitted defaults to 8");
+				return;
+			}
+			if (BOARD_SIZE < 1 || BOARD_SIZE > 10) {
+				System.out.println("board size "+BOARD_SIZE+" is not in the range of 1 through 10");
+				return;
+			}
+		}
+
 		List<String> results = new ArrayList<>();
 		String ordinalEncoding = IntStream.range(0, BOARD_SIZE).mapToObj(i -> ((Integer) i).toString()).collect(Collectors.joining(""));
+		System.out.println("For a " + BOARD_SIZE + " x " + BOARD_SIZE + " board ...");
 		System.out.println("Ordinal Encoding of Queen Positions: " + ordinalEncoding);
 		permutation("", ordinalEncoding, results);
 
 		System.out.println("There are " + results.size() + " solutions.\n");
-		System.out.println("Solutions encoded by the file/column ordinal of the Queen's position on the board:");
+		System.out.println("NOTES:  Using an index origin of 0 labels the leftmost file/column of the chess board as 0.  ");
+		System.out.println("\tEach solution has its board labled on the left with the ordinal encoding.");
+		System.out.println("\tSolutions encoded by the file/column ordinal of the Queen's position on the board:");
 		System.out.println(results);
 
 
