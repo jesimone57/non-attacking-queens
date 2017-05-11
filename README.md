@@ -31,8 +31,8 @@ can be implemented.
 >We wil need a way to determine which solutions are unique and which solutions are just a rotation or mirror
 of the board and therefore duplicates or already found solutions.
 
->Lastly we will need a way to display the solution in clear way and in which we can verify with the known
-solutions.
+>Lastly we will need a way to appropriately display the solution such that it is easy to read and can be verified against the known
+solutions.  Printing out the chess board with the queen positions labeled will do the job nicely.
 
 ### To execute the code
 1. git clone the repo to your local machine
