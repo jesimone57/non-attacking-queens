@@ -13,6 +13,13 @@ dependencies {
 
 task run(type: JavaExec) {
   main = 'NonAttackingQueens'
+  args "${queens}" 
   classpath = sourceSets.main.runtimeClasspath
-  args '8'
+
+}
+
+test {
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
 }
