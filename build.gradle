@@ -1,0 +1,15 @@
+apply plugin: 'java'
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+task run(type: JavaExec) {
+  main = 'NonAttackingQueens'
+  classPath = runtimeClasspath
+  args '8'
+}
