@@ -68,6 +68,10 @@ BUILD SUCCESSFUL in 1s
 5 actionable tasks: 5 executed
 </pre>
 3. gradle run
+4. gradle -Pqueens=4 run
+5. gradle -Pqueens=5 run
+6. gradle -Pqueens=6 run
+7. gradle -Pqueens=10 run
 
 
 ### Sample Output for a Standard 8 by 8 Chess Board (board size n defaults to 8)
