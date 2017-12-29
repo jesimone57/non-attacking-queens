@@ -34,11 +34,41 @@ of the board and therefore duplicates or already found solutions.
 >Lastly we will need a way to appropriately display the solution such that it is easy to read and can be verified against the known
 solutions.  Printing out the chess board with the queen positions labeled will do the job nicely.
 
+### Prerequisites
+* java 1.8+
+* git
+* gradle 
+
 ### To execute the code
-1. git clone the repo to your local machine
-2. mvn clean compile test
-3. cd target/classes
-3. java NonAttackingQueens n    (Note:  n is optional.  If n is omitted the default is 8)
+1. git clone https://github.com/jesimone57/non-attacking-queens.git
+2. gradle clean build
+<pre>
+> Task :test
+
+NonAttackingQueensTest > testIsNonAttackingOnDiagonalStandardBoard PASSED
+
+NonAttackingQueensTest > testIsNonAttackingOnDiagonalOnly2Queens PASSED
+
+NonAttackingQueensTest > testIsNonAttackingOnDiagonalOnly3Queens PASSED
+
+PermutationTest > testPermutationTest1 PASSED
+
+PermutationTest > testPermutationTest2 PASSED
+
+PermutationTest > testPermutationTest3 PASSED
+
+PermutationTest > testPermutationTest4 PASSED
+
+PermutationTest > testPermutationTest5 PASSED
+
+PermutationTest > testPermutationTest6 PASSED
+
+
+BUILD SUCCESSFUL in 1s
+5 actionable tasks: 5 executed
+</pre>
+3. gradle run
+
 
 ### Sample Output for a Standard 8 by 8 Chess Board (board size n defaults to 8)
 
