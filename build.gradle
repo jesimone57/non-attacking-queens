@@ -13,9 +13,9 @@ dependencies {
 task run(type: JavaExec) {
   main = 'NonAttackingQueens'
 
-  if (! project.hasProperty('queens')) project.ext.'queens' = '8'
-  args "${queens}" 
-
+  if (project.hasProperty('queens')) {
+        args "${queens}"
+  }
   classpath = sourceSets.main.runtimeClasspath
 }
 
