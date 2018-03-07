@@ -119,14 +119,16 @@ public class NonAttackingQueens {
 		return new StringBuilder(s).reverse().toString();
 	}
 
-	private static String rotate(String s, int boardSize) {
+	public static String rotate(String s, int boardSize) {
 		String[] result = new String[boardSize];
 		int col = 0;
 		for (Character c : s.toCharArray()) {
 			Integer row = Character.getNumericValue(c);
 			result[row] = Integer.toString(col);
+            //System.out.println("result("+row+") = "+Integer.toString(col));
 			col++;
 		}
+        //System.out.println(Arrays.toString(result).join("", result));
 		return Arrays.toString(result).join("", result);
 	}
 

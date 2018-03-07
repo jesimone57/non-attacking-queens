@@ -1,12 +1,32 @@
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertFalse;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
  * Created by jsimone on 5/9/17.
  */
 public class NonAttackingQueensTest {
+
+    @Test
+    public void testRotateBoardSize3() {
+        assertEquals("021", NonAttackingQueens.rotate("021", 3));
+        assertEquals("012", NonAttackingQueens.rotate("012", 3));
+
+        assertEquals("102", NonAttackingQueens.rotate("102", 3));
+        assertEquals("201", NonAttackingQueens.rotate("120", 3));
+
+        assertEquals("120", NonAttackingQueens.rotate("201", 3));
+        assertEquals("210", NonAttackingQueens.rotate("210", 3));
+    }
+
+    @Test
+    public void testRotateBoardSize8() {
+        assertEquals("06471352", NonAttackingQueens.rotate("04752613", 8));
+        assertEquals("04752613", NonAttackingQueens.rotate("06471352", 8));
+    }
+
 
 	@Test
 	public void testIsNonAttackingOnDiagonalOnly2Queens() throws Exception {
