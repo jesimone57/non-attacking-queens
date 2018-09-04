@@ -41,7 +41,7 @@ solutions.  Printing out the chess board with the queen positions labeled will d
 
 ### To execute the code
 1. git clone https://github.com/jesimone57/non-attacking-queens.git
-2. gradle clean build
+2. gradle clean build test
 <pre>
 > Task :test
 
