@@ -1,9 +1,10 @@
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+import static java.util.Arrays.asList;
+import static java.util.Collections.singletonList;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -12,47 +13,47 @@ import static org.junit.Assert.assertEquals;
 public class PermutationTest {
 
 	@Test
-	public void testPermutationTest1() throws Exception {
-		List<String> prefix = Arrays.asList("");
-		List<String> list = Arrays.asList("A");
+	public void testPermutationTest1() {
+		List<String> prefix = singletonList("");
+		List<String> list = singletonList("A");
 		List<String> results = new ArrayList<>();
 
 		NonAttackingQueens.permutation(prefix, list, results);
 		assertEquals(factorial(list.size()), results.size());
-		assertEquals(Arrays.asList("A"), results);
+		assertEquals(singletonList("A"), results);
 	}
 
 	@Test
-	public void testPermutationTest2() throws Exception {
-		List<String> prefix = Arrays.asList("");
-		List<String> list = Arrays.asList("A", "B");
+	public void testPermutationTest2() {
+		List<String> prefix = singletonList("");
+		List<String> list = asList("A", "B");
 		List<String> results = new ArrayList<>();
 
 		NonAttackingQueens.permutation(prefix, list, results);
 		assertEquals(factorial(list.size()), results.size());
-		assertEquals(Arrays.asList("AB", "BA"), results);
+		assertEquals(asList("AB", "BA"), results);
 	}
 
 	@Test
-	public void testPermutationTest3() throws Exception {
-		List<String> prefix = Arrays.asList("");
-		List<String> list = Arrays.asList("A", "B", "C");
+	public void testPermutationTest3() {
+		List<String> prefix = singletonList("");
+		List<String> list = asList("A", "B", "C");
 		List<String> results = new ArrayList<>();
 
 		NonAttackingQueens.permutation(prefix, list, results);
 		assertEquals(factorial(list.size()), results.size());
-		assertEquals(Arrays.asList("ABC", "ACB", "BAC", "BCA", "CAB", "CBA"), results);
+		assertEquals(asList("ABC", "ACB", "BAC", "BCA", "CAB", "CBA"), results);
 	}
 
 	@Test
-	public void testPermutationTest4() throws Exception {
-		List<String> prefix = Arrays.asList("");
-		List<String> list = Arrays.asList("A", "B", "C", "D");
+	public void testPermutationTest4() {
+		List<String> prefix = singletonList("");
+		List<String> list = asList("A", "B", "C", "D");
 		List<String> results = new ArrayList<>();
 
 		NonAttackingQueens.permutation(prefix, list, results);
 		assertEquals(factorial(list.size()), results.size());
-		assertEquals(Arrays.asList(
+		assertEquals(asList(
 				"ABCD", "ABDC", "ACBD", "ACDB", "ADBC", "ADCB",
 				"BACD", "BADC", "BCAD", "BCDA", "BDAC", "BDCA",
 				"CABD", "CADB", "CBAD", "CBDA", "CDAB", "CDBA",
@@ -60,9 +61,9 @@ public class PermutationTest {
 	}
 
 	@Test
-	public void testPermutationTest5() throws Exception {
-		List<String> prefix = Arrays.asList("");
-		List<String> list = Arrays.asList("A", "B", "C", "D", "E");
+	public void testPermutationTest5() {
+		List<String> prefix = singletonList("");
+		List<String> list = asList("A", "B", "C", "D", "E");
 		List<String> results = new ArrayList<>();
 
 		NonAttackingQueens.permutation(prefix, list, results);
@@ -70,9 +71,9 @@ public class PermutationTest {
 	}
 
 	@Test
-	public void testPermutationTest6() throws Exception {
-		List<String> prefix = Arrays.asList("");
-		List<String> list = Arrays.asList("A", "B", "C", "D", "E", "F");
+	public void testPermutationTest6() {
+		List<String> prefix = singletonList("");
+		List<String> list = asList("A", "B", "C", "D", "E", "F");
 		List<String> results = new ArrayList<>();
 
 		NonAttackingQueens.permutation(prefix, list, results);
