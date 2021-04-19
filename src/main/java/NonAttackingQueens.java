@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -31,25 +30,26 @@ import java.util.stream.IntStream;
  */
 public class NonAttackingQueens {
 
+	private static int boardSize = 8;
+
 	public static void main(String[] args) {
-		int BOARD_SIZE = 8;
 		if (args.length == 1) {
 			try {
-				BOARD_SIZE = Integer.valueOf(args[0]);
+				boardSize = Integer.valueOf(args[0]);
 			} catch (NumberFormatException ex) {
 				System.out.println("Usage is: java NonAttackingQueens n");
 				System.out.println("Where n = board size.  n must be in the range of 1 through 10.  n is optional and if omitted defaults to 8");
 				return;
 			}
-			if (BOARD_SIZE < 1 || BOARD_SIZE > 10) {
-				System.out.println("board size "+BOARD_SIZE+" is not in the range of 1 through 10");
+			if (boardSize < 1 || boardSize > 10) {
+				System.out.println("board size "+ boardSize +" is not in the range of 1 through 10");
 				return;
 			}
 		}
 
 		List<String> results = new ArrayList<>();
-		String ordinalEncoding = IntStream.range(0, BOARD_SIZE).mapToObj(i -> ((Integer) i).toString()).collect(Collectors.joining(""));
-		System.out.println("For a " + BOARD_SIZE + " x " + BOARD_SIZE + " board ...");
+		String ordinalEncoding = IntStream.range(0, boardSize).mapToObj(i -> ((Integer) i).toString()).collect(Collectors.joining(""));
+		System.out.println("For a " + boardSize + " x " + boardSize + " board ...");
 		System.out.println("Ordinal Encoding of Queen Positions: " + ordinalEncoding);
 		permutation("", ordinalEncoding, results);
 
@@ -78,10 +78,10 @@ public class NonAttackingQueens {
 //        System.out.println(flip(rotate(solution)));
 //        System.out.println(reverse(flip(rotate(solution))));
 
-		Map<String, Set<String>> map = pruneResults(results, BOARD_SIZE);
+		Map<String, Set<String>> map = pruneResults(results, boardSize);
 		System.out.println("\nThere are " + map.size() + " unique solutions " +
 				"by taking into account all possible rotations and reflections/mirrors of the board.\n");
-		Display.displaySolutions(map, BOARD_SIZE);
+		Display.displaySolutions(map, boardSize);
 	}
 
 	private static void addVariationToSet(String variation, Set<String> variationSet, Set<String> resultsAlreadyAccountedFor) {
@@ -129,27 +129,27 @@ public class NonAttackingQueens {
 			col++;
 		}
         //System.out.println(Arrays.toString(result).join("", result));
-		return Arrays.toString(result).join("", result);
+		return String.join("", result);
 	}
 
 	private static String flip(String s, int boardSize) {
 		int maxOrdinal = boardSize - 1;
-		String result = "";
+		StringBuilder stringBuilder = new StringBuilder();
 		for (Character c : s.toCharArray()) {
 			Integer i = Character.getNumericValue(c);
-			result = result + (maxOrdinal - i);
+			stringBuilder.append(maxOrdinal - i);
 		}
-		return result;
+		return stringBuilder.toString();
 	}
 
 	public static boolean isNonAttackingOnDiagonal(String s) {
 		boolean result = true;
 		for (int i = 0; i < s.length(); i++) {
 			String s2 = String.valueOf(s.charAt(i));
-			int i2 = Integer.valueOf(s2);
+			int i2 = Integer.parseInt(s2);
 			for (int j = 0; j < s.length(); j++) {
 				String s3 = String.valueOf(s.charAt(j));
-				int j3 = Integer.valueOf(s3);
+				int j3 = Integer.parseInt(s3);
 				if (i != j) {
 					if (Math.abs(i - j) == Math.abs(i2 - j3)) {
 						result = false;
@@ -157,7 +157,7 @@ public class NonAttackingQueens {
 					}
 				}
 			}
-			if (result == false) {
+			if (!result) {
 				break;
 			}
 		}
