@@ -35,7 +35,7 @@ public class NonAttackingQueens {
 	public static void main(String[] args) {
 		if (args.length == 1) {
 			try {
-				boardSize = Integer.valueOf(args[0]);
+				boardSize = Integer.parseInt(args[0]);
 			} catch (NumberFormatException ex) {
 				System.out.println("Usage is: java NonAttackingQueens n");
 				System.out.println("Where n = board size.  n must be in the range of 1 through 10.  n is optional and if omitted defaults to 8");
@@ -123,7 +123,7 @@ public class NonAttackingQueens {
 		String[] result = new String[boardSize];
 		int col = 0;
 		for (Character c : s.toCharArray()) {
-			Integer row = Character.getNumericValue(c);
+			int row = Character.getNumericValue(c);
 			result[row] = Integer.toString(col);
             //System.out.println("result("+row+") = "+Integer.toString(col));
 			col++;
